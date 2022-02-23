@@ -7,10 +7,8 @@
 # Use alpine-based NodeJS base image
 FROM node:latest
 
-# Set the variable for the container's working directory
+# Set the variable for the container working directory, create and set the working directory
 ARG WORK_DIRECTORY=/program
-
-# Create app directory
 RUN mkdir -p $WORK_DIRECTORY
 WORKDIR $WORK_DIRECTORY
 
