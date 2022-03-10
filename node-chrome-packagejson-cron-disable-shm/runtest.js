@@ -2,9 +2,7 @@ const { Builder, By } = require('selenium-webdriver');
 const { Options } = require('selenium-webdriver/chrome');
 const cron = require('node-cron');
 
-const CRON = '*/1 * * * *';
-
-cron.schedule(CRON, async () => await main());
+cron.schedule('*/1 * * * *', async () => await main());
 
 async function main() {
     let driver;
@@ -22,13 +20,33 @@ async function main() {
         // Navigate to Google and get the "Google Search" button text.
         await driver.get('https://www.google.com');
         const btnText = await driver.findElement(By.name('btnK')).getAttribute('value');
-        console.log(`Google button text: ${btnText}`);
+        log(`Google button text: ${btnText}`);
     } catch (e) {
-        console.log(e);
+        log(e);
     } finally {
         if (driver) {
             await driver.close();   // helps chromedriver shut down cleanly and delete the "scoped_dir" temp directories that eventually fill up the harddrive.
             await driver.quit();
         }
     }
-});
+}
+
+function getDateTimeStamp() {
+    const dateTimeFormat = {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        fractionalSecondDigits: 3,
+        hour12: false
+    };;
+
+    return new Date().toLocaleString('en-US', dateTimeFormat);
+}
+
+function log(msg) {
+    console.log(`${getDateTimeStamp()}: ${msg}`);
+}
