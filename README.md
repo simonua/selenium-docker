@@ -13,5 +13,8 @@ This setup downloads latest Chrome and corresponding chromedriver, installs Sele
 ### node-chrome-packagejson
 The same setup as _node-chrome_ but using a _package.json_ file to install dependencies. This makes it more cross-functional when just installing and running the project outside of a container.
 
+### node-chrome-packagejson-cron-disable-shm
+Runs a cron job with shared memory (shm) disabled for Chrome to investigate memory leak.
+
 ## Misc
 Issue on Stackoverflow: https://stackoverflow.com/questions/71135033/nodejs-selenium-webdriver-for-linux-chrome-docker-image
